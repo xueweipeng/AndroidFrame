@@ -8,12 +8,13 @@ public class Init {
     private static final String TAG = "InitTest";
     public static int a = 1;
     public static Init obj = new Init();
-    private int n = 5;
 
     static {
         a = 2;
         System.out.println(2);
     }
+
+    private int n = 5;
 
     {
         a = 3;
@@ -24,6 +25,11 @@ public class Init {
         a = 4;
         System.out.println(4);
     }
+
+    public static void main(String[] args) {
+        new Init();
+    }
+
     private void fun() {
 
     }
@@ -33,10 +39,6 @@ public class Init {
             n = 6;
             fun();
         }
-    }
-
-    public static void main(String[] args) {
-        new Init();
     }
 }
 

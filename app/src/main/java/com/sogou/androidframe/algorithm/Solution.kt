@@ -59,7 +59,7 @@ object Solution {
         return retList
     }
 
-    fun preOrder(node:TreeNode?) {
+    fun preOrder(node: TreeNode?) {
 
     }
 
