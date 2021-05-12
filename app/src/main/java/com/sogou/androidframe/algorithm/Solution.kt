@@ -1,6 +1,7 @@
 package com.sogou.androidframe.algorithm
 
 import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.ArrayList
 
 /**
@@ -121,6 +122,46 @@ object Solution {
     //		'0'
     //	}
     //}
+    fun waitModel() {
+        var atomicInteger =
+            AtomicInteger(3)
+        var t1 = Thread(Runnable {
+            println("t1 start")
+            atomicInteger.getAndDecrement()
+        })
+        var t2 = Thread(Runnable {
+            println("t2 start")
+            atomicInteger.getAndDecrement()
+        })
+        var t3 = Thread(Runnable {
+            println("t3 start")
+            try {
+                Thread.sleep(300)
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            atomicInteger.getAndDecrement()
+        })
+        var twait = Thread(Runnable {
+            val s = System.currentTimeMillis()
+            while (true) {
+                if (atomicInteger.get() == 0) {
+                    println("atomic finish")
+                    break
+                } else {
+                    if (System.currentTimeMillis() - s > 200) {
+                        println("timeout finish")
+                        break
+                    }
+                }
+            }
+        })
+        twait.start()
+        t1.start()
+        t2.start()
+        t3.start()
+    }
+
 
     fun main() {
 
